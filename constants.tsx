@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PikminColor, PikminStatus, DecorType } from './types';
 
@@ -19,11 +18,6 @@ export const PIKMIN_COLORS: PikminColor[] = [
 
 export const PIKMIN_STATUSES: PikminStatus[] = [
   PikminStatus.SEEDLING, PikminStatus.PIKMIN, PikminStatus.DECOR
-];
-
-export const YELLOW_PUNS = [
-  'Yellen', 'Yell-o', 'Yell-sa', 'Yell-iot', 'Yell-iver', 
-  'Yell-vis', 'Yell-izabeth', 'Yell-ington', 'Yell-ia', 'Yell-as'
 ];
 
 export const COLOR_CLASSES: Record<PikminColor, string> = {

@@ -1,1 +1,1 @@
-// Consolidation active: App logic has been moved to index.html to support GitHub Pages static hosting.
+// Consolidation active: App logic is fully contained within index.html to support single-file delivery and static hosting.

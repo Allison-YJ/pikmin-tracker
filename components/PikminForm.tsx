@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { PikminColor, PikminStatus, DecorType, PikminEntry } from '../types';
-import { PIKMIN_COLORS, PIKMIN_STATUSES, DECOR_TYPES, YELLOW_PUNS } from '../constants';
+import { PIKMIN_COLORS, PIKMIN_STATUSES, DECOR_TYPES } from '../constants';
 
 interface PikminFormProps {
   onAdd: (entry: PikminEntry) => void;
@@ -13,24 +12,11 @@ const PikminForm: React.FC<PikminFormProps> = ({ onAdd }) => {
   const [decorType, setDecorType] = useState<DecorType>('Roadside');
   const [status, setStatus] = useState<PikminStatus>(PikminStatus.SEEDLING);
 
-  const handleSuggestName = () => {
-    const randomPun = YELLOW_PUNS[Math.floor(Math.random() * YELLOW_PUNS.length)];
-    setName(randomPun);
-  };
-
-  const onColorChange = (newColor: PikminColor) => {
-    setColor(newColor);
-    if (newColor === PikminColor.YELLOW && !name) {
-      const randomPun = YELLOW_PUNS[Math.floor(Math.random() * YELLOW_PUNS.length)];
-      setName(randomPun);
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newEntry: PikminEntry = {
       id: crypto.randomUUID(),
-      name: name || `${color} Pikmin`,
+      name: name || 'New Pikmin',
       color,
       decorType,
       status,
@@ -76,7 +62,7 @@ const PikminForm: React.FC<PikminFormProps> = ({ onAdd }) => {
               <label className="text-xs font-black text-soft-slate uppercase tracking-widest ml-1">Color</label>
               <select
                 value={color}
-                onChange={(e) => onColorChange(e.target.value as PikminColor)}
+                onChange={(e) => setColor(e.target.value as PikminColor)}
                 className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-4 text-sm font-bold focus:ring-4 focus:ring-sage/10 outline-none transition-all appearance-none cursor-pointer"
               >
                 {PIKMIN_COLORS.map((c) => (
@@ -96,15 +82,6 @@ const PikminForm: React.FC<PikminFormProps> = ({ onAdd }) => {
                 placeholder="Enter a nickname..."
                 className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-4 text-sm font-bold focus:ring-4 focus:ring-sage/10 outline-none transition-all"
               />
-              {color === PikminColor.YELLOW && (
-                <button
-                  type="button"
-                  onClick={handleSuggestName}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-black text-[10px] px-3 py-1.5 rounded-xl uppercase tracking-widest transition-colors shadow-sm"
-                >
-                  Pun!
-                </button>
-              )}
             </div>
           </div>
 
