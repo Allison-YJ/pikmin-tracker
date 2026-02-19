@@ -1,0 +1,5 @@
+{
+  "name": "Pikmin Manager",
+  "description": "A high-performance, mobile-first tracker for your Pikmin Bloom collection with local storage, smart name suggestions, and dark-mode aesthetics.",
+  "requestFramePermissions": []
+}
