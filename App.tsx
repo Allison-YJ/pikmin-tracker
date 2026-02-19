@@ -102,13 +102,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-slate-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-warm-white">
       {/* Sidebar (Desktop) */}
       <aside className="hidden md:flex md:w-80 bg-white border-r border-slate-100 flex-col z-50 sticky top-0 h-screen">
         <div className="p-10">
-          <div className="flex items-center gap-4 text-blue-600">
+          <div className="flex items-center gap-4 text-sage">
             <i className="fa-solid fa-leaf text-4xl"></i>
-            <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Pikmin Manager</h1>
+            <h1 className="text-2xl font-black text-slate-800 uppercase tracking-tighter">Pikmin Manager</h1>
           </div>
         </div>
 
@@ -117,8 +117,8 @@ const App: React.FC = () => {
             onClick={() => setActiveTab('log')}
             className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs transition-all ${
               activeTab === 'log' 
-              ? 'bg-blue-600 text-white shadow-xl shadow-blue-100 translate-x-1' 
-              : 'text-slate-400 hover:bg-slate-50'
+              ? 'bg-sage text-white shadow-lg shadow-sage/10 translate-x-1' 
+              : 'text-soft-slate hover:bg-sage-light'
             }`}
           >
             <i className="fa-solid fa-circle-plus text-xl"></i>
@@ -128,8 +128,8 @@ const App: React.FC = () => {
             onClick={() => setActiveTab('collection')}
             className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs transition-all ${
               activeTab === 'collection' 
-              ? 'bg-blue-600 text-white shadow-xl shadow-blue-100 translate-x-1' 
-              : 'text-slate-400 hover:bg-slate-50'
+              ? 'bg-sage text-white shadow-lg shadow-sage/10 translate-x-1' 
+              : 'text-soft-slate hover:bg-sage-light'
             }`}
           >
             <i className="fa-solid fa-shapes text-xl"></i>
@@ -138,9 +138,9 @@ const App: React.FC = () => {
         </nav>
 
         <div className="p-8">
-          <div className="bg-slate-50 rounded-3xl p-6 border border-slate-100">
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 text-center">Data Persistence</p>
-            <p className="text-xs font-bold text-slate-600 text-center">Auto-saved to Local Storage</p>
+          <div className="bg-sage-light rounded-3xl p-6 border border-sage/5">
+            <p className="text-[10px] font-black text-soft-slate uppercase tracking-widest mb-1 text-center">Data Persistence</p>
+            <p className="text-xs font-bold text-sage-dark text-center">Auto-saved Locally</p>
           </div>
         </div>
       </aside>
@@ -155,36 +155,36 @@ const App: React.FC = () => {
             <Dashboard entries={entries} onExport={handleExportCSV} />
 
             {/* Filter Section */}
-            <section className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+            <section className="bg-white p-8 rounded-[2.5rem] border border-slate-100">
               <div className="flex flex-wrap items-end gap-6">
                 <div className="flex-1 min-w-[150px] space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Color</label>
+                  <label className="text-[10px] font-black text-soft-slate uppercase tracking-widest ml-1">Color</label>
                   <select 
                     value={filterColor}
                     onChange={(e) => setFilterColor(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-blue-100 outline-none appearance-none cursor-pointer"
+                    className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-sage/10 outline-none appearance-none cursor-pointer"
                   >
                     <option value="">All Colors</option>
                     {PIKMIN_COLORS.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div className="flex-1 min-w-[150px] space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
+                  <label className="text-[10px] font-black text-soft-slate uppercase tracking-widest ml-1">Category</label>
                   <select 
                     value={filterDecor}
                     onChange={(e) => setFilterDecor(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-blue-100 outline-none appearance-none cursor-pointer"
+                    className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-sage/10 outline-none appearance-none cursor-pointer"
                   >
                     <option value="">All Categories</option>
                     {DECOR_TYPES.map(d => <option key={d} value={d}>{d}</option>)}
                   </select>
                 </div>
                 <div className="flex-1 min-w-[150px] space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Status</label>
+                  <label className="text-[10px] font-black text-soft-slate uppercase tracking-widest ml-1">Status</label>
                   <select 
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-blue-100 outline-none appearance-none cursor-pointer"
+                    className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-3 text-xs font-bold focus:ring-4 focus:ring-sage/10 outline-none appearance-none cursor-pointer"
                   >
                     <option value="">All Statuses</option>
                     {PIKMIN_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
@@ -192,7 +192,7 @@ const App: React.FC = () => {
                 </div>
                 <button 
                   onClick={resetFilters}
-                  className="px-6 py-3 text-xs font-black text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-widest"
+                  className="px-6 py-3 text-xs font-black text-soft-slate hover:text-sage transition-colors uppercase tracking-widest"
                 >
                   Reset
                 </button>
@@ -210,17 +210,17 @@ const App: React.FC = () => {
       </main>
 
       {/* Bottom Navigation (Mobile Only) */}
-      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-white/90 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] py-4 px-10 flex justify-between items-center shadow-2xl z-50">
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-[2.5rem] py-4 px-10 flex justify-between items-center shadow-xl z-50">
         <button 
           onClick={() => setActiveTab('log')}
-          className={`flex flex-col items-center gap-1 transition-all ${activeTab === 'log' ? 'text-blue-600 scale-110' : 'text-slate-300'}`}
+          className={`flex flex-col items-center gap-1 transition-all ${activeTab === 'log' ? 'text-sage scale-110' : 'text-slate-300'}`}
         >
           <i className="fa-solid fa-circle-plus text-2xl"></i>
           <span className="text-[8px] font-black uppercase tracking-tighter">Log</span>
         </button>
         <button 
           onClick={() => setActiveTab('collection')}
-          className={`flex flex-col items-center gap-1 transition-all ${activeTab === 'collection' ? 'text-blue-600 scale-110' : 'text-slate-300'}`}
+          className={`flex flex-col items-center gap-1 transition-all ${activeTab === 'collection' ? 'text-sage scale-110' : 'text-slate-300'}`}
         >
           <i className="fa-solid fa-shapes text-2xl"></i>
           <span className="text-[8px] font-black uppercase tracking-tighter">Collection</span>

@@ -24,10 +24,10 @@ const EditModal: React.FC<EditModalProps> = ({ entry, onClose, onSave }) => {
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onClose}></div>
-      <div className="relative bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden p-8 animate-in fade-in zoom-in duration-200">
-        <h3 className="text-xl font-extrabold text-slate-900 mb-6 flex items-center gap-3">
-          <i className="fa-solid fa-pen-to-square text-blue-600"></i>
+      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative bg-white w-full max-w-md rounded-[2.5rem] shadow-xl overflow-hidden p-8 animate-in fade-in zoom-in duration-200 border border-slate-100">
+        <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center gap-3">
+          <i className="fa-solid fa-pen-to-square text-sage"></i>
           Edit Pikmin
         </h3>
         
@@ -38,7 +38,7 @@ const EditModal: React.FC<EditModalProps> = ({ entry, onClose, onSave }) => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3.5 text-sm font-medium focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+              className="w-full bg-warm-white border border-slate-100 rounded-2xl px-5 py-3.5 text-sm font-medium focus:ring-4 focus:ring-sage/10 outline-none transition-all"
             />
           </div>
 
@@ -51,8 +51,8 @@ const EditModal: React.FC<EditModalProps> = ({ entry, onClose, onSave }) => {
                   onClick={() => setStatus(s)}
                   className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-sm font-bold border transition-all ${
                     status === s 
-                    ? 'bg-blue-600 border-blue-600 text-white shadow-lg' 
-                    : 'bg-white border-slate-100 text-slate-500 hover:border-blue-200'
+                    ? 'bg-sage border-sage text-white shadow-md shadow-sage/10' 
+                    : 'bg-warm-white border-slate-100 text-soft-slate hover:border-sage/30'
                   }`}
                 >
                   {s}
@@ -65,7 +65,7 @@ const EditModal: React.FC<EditModalProps> = ({ entry, onClose, onSave }) => {
           <div className="flex gap-3 pt-4">
             <button
               onClick={onClose}
-              className="flex-1 py-4 rounded-2xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition-all"
+              className="flex-1 py-4 rounded-2xl bg-warm-white border border-slate-100 text-soft-slate font-bold hover:bg-slate-50 transition-all"
             >
               Cancel
             </button>
@@ -74,7 +74,7 @@ const EditModal: React.FC<EditModalProps> = ({ entry, onClose, onSave }) => {
                 onSave(entry.id, { name, status });
                 onClose();
               }}
-              className="flex-1 py-4 rounded-2xl bg-blue-600 text-white font-bold shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all"
+              className="flex-1 py-4 rounded-2xl bg-sage text-white font-bold shadow-lg shadow-sage/10 hover:bg-sage-dark transition-all"
             >
               Save Changes
             </button>
