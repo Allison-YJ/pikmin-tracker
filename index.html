@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pikmin Manager</title>
+    <!-- Favicon Fix: Emoji as Icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+    
     <!-- Tailwind for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
@@ -40,6 +43,8 @@
             background-color: #FDFDFD;
             margin: 0;
             padding: 0;
+            opacity: 1 !important; /* Force visibility */
+            display: block !important; /* Force display */
         }
         .sage-gradient-header {
             background: linear-gradient(135deg, #7A9482 0%, #8DA695 100%);
@@ -56,7 +61,6 @@
 <body class="text-slate-800 min-h-screen">
     <div id="root"></div>
 
-    <!-- Import Map for ESM support if needed, though we use Babel standalone for the single-file JSX -->
     <script type="importmap">
 {
   "imports": {
@@ -71,9 +75,10 @@
         import React, { useState, useEffect, useMemo } from 'react';
         import ReactDOM from 'react-dom/client';
 
-        // --- CONSTANTS & TYPES ---
-        const STORAGE_KEY = 'pikminData'; // Primary key as requested
-        const FALLBACK_KEY = 'pikmin_tracker_pro_v4';
+        console.log("App script loaded. Initializing...");
+
+        // --- CONSTANTS ---
+        const STORAGE_KEY = 'pikminData';
 
         const DECOR_TYPES = [
           'Roadside', 'Restaurant', 'Cafe', 'Sweet Shop', 'Movie Theater', 
@@ -291,13 +296,12 @@
 
         const App = () => {
           const [entries, setEntries] = useState(() => {
-            // Robust initialization for localStorage
+            // Robust initialization for localStorage as requested
             try {
-                const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(FALLBACK_KEY);
-                const parsed = saved ? JSON.parse(saved) : [];
-                return Array.isArray(parsed) ? parsed : [];
+                const myData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+                return Array.isArray(myData) ? myData : [];
             } catch (e) {
-                console.error("Storage corrupted:", e);
+                console.error("Storage load failed, starting fresh:", e);
                 return [];
             }
           });
@@ -329,8 +333,8 @@
               <aside className="hidden md:flex md:w-80 bg-white border-r border-slate-100 flex-col sticky top-0 h-screen">
                 <div className="p-10"><div className="flex items-center gap-4 text-sage"><i className="fa-solid fa-leaf text-4xl"></i><h1 className="text-2xl font-black text-slate-800 uppercase tracking-tighter">Pikmin Manager</h1></div></div>
                 <nav className="flex-1 px-6 space-y-3">
-                  <button onClick={() => setActiveTab('log')} className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs ${activeTab === 'log' ? 'bg-sage text-white shadow-lg' : 'text-soft-slate hover:bg-sage-light'}`}><i className="fa-solid fa-circle-plus"></i> Log Entry</button>
-                  <button onClick={() => setActiveTab('collection')} className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs ${activeTab === 'collection' ? 'bg-sage text-white shadow-lg' : 'text-soft-slate hover:bg-sage-light'}`}><i className="fa-solid fa-shapes"></i> Collection</button>
+                  <button onClick={() => setActiveTab('log')} className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'log' ? 'bg-sage text-white shadow-lg' : 'text-soft-slate hover:bg-sage-light'}`}><i className="fa-solid fa-circle-plus"></i> Log Entry</button>
+                  <button onClick={() => setActiveTab('collection')} className={`w-full flex items-center gap-5 px-6 py-5 rounded-[1.5rem] font-black uppercase tracking-widest text-xs transition-all ${activeTab === 'collection' ? 'bg-sage text-white shadow-lg' : 'text-soft-slate hover:bg-sage-light'}`}><i className="fa-solid fa-shapes"></i> Collection</button>
                 </nav>
               </aside>
               <main className="flex-1 px-4 lg:px-16 py-8 pb-32">
@@ -356,25 +360,23 @@
           );
         };
 
-        // DOM Content Loaded wrapper for safe initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            const init = () => {
-                console.log("App initialized successfully");
-                try {
-                    const rootElement = document.getElementById('root');
-                    if (rootElement) {
-                        const root = ReactDOM.createRoot(rootElement);
-                        root.render(<App />);
-                    } else {
-                        console.error("Root element not found");
-                    }
-                } catch (err) {
-                    console.error("Mounting error:", err);
+        // Window Onload wrapper for reliable initialization
+        window.onload = function() {
+            console.log("App initialization started...");
+            try {
+                const rootElement = document.getElementById('root');
+                if (rootElement) {
+                    const root = ReactDOM.createRoot(rootElement);
+                    root.render(<App />);
+                    console.log("App initialized successfully");
+                } else {
+                    console.error("Critical error: Root element not found");
                 }
-                console.log("App initialized successfully");
-            };
-            init();
-        });
+            } catch (err) {
+                console.error("Mounting error:", err);
+            }
+            console.log("App initialization complete");
+        };
     </script>
 </body>
 </html>
